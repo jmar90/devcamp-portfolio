@@ -1,0 +1,18 @@
+<h1>Porfolio Items</h1>
+
+<!-- Link to add new portfolio item via link_to method -->
+<%= link_to "Create New Item", new_portfolio_path %>
+
+<!-- Loop through & display each portfolio item -->
+<!-- '%>'' = embedded ruby (erb) -->
+<% @portfolio_items.each do |portfolio_item| %>
+  <!-- Have title link to portfolio item show page -->
+  <p><%= link_to portfolio_item.title, portfolio_show_path(portfolio_item) %></p>
+  <p><%= portfolio_item.subtitle %></p>
+  <p><%= portfolio_item.body %></p>
+  <%= image_tag portfolio_item.thumb_image unless portfolio_item.thumb_image.nil? %>
+  <!-- Link to edit page -->
+  <%= link_to "Edit", edit_portfolio_path(portfolio_item) %>
+  <!-- Link to delete portfolio item. method:delete tells Rails that we want to perform delete action vs. just route to show page. We don't have to pass method thru to show page b/c default method is get. -->
+  <%= link_to 'Delete Portfolio Item', portfolio_path(portfolio_item), method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
