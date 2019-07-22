@@ -4,13 +4,18 @@ Rails.application.routes.draw do
   resources :portfolios, except: [:show]
   get 'portfolio/:id/', to: 'portfolios#show', as: 'portfolio_show'
 
-  # Chagne route from pages/about to just about. Point about route to about action in pages controller.
+  # Change route from pages/about to just about. Point about route to about action in pages controller.
   # controller goes on left of #; action on right
   # Note: You can pass in anything as route name (eg, 'about-me' instead of 'about')
   get 'about-me', to: 'pages#about'
   get 'contact', to: 'pages#contact'
 
-  resources :blogs
+  # Create toggle_status route
+  resources :blogs do
+    member do
+      get :toggle_status
+    end
+  end
 
   # Set root path (home page) to pages#home (pages controller, home action)
   root to: 'pages#home'
