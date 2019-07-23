@@ -3,8 +3,19 @@ class PortfoliosController < ApplicationController
   # Index Action. Call Portfolio model & make available to view
   # thru @portfolio_items var.
   def index
-    @portfolio_items = Portfolio.all 
+    # Filter items so only items with angular subtitle appear
+      # This uses the custom scope we created in Portfolio 
+      # model file.
+    #@portfolio_items = Portfolio.angular 
+    # Filter to ruby on rails subtitle
+    #@portfolio_items = Portfolio.ruby_on_rails_portfolio_items
+    @portfolio_items = Portfolio.all
   end
+
+  # Create custom angular method that filter by angular subtitle
+  def angular
+    @angular_portfolio_items = Portfolio.angular
+  end 
 
   # New Action - renders form to create new portfolio item.
   def new
