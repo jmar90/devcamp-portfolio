@@ -14,4 +14,12 @@ class ApplicationController < ActionController::Base
   #   devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   # end
   include DeviseWhitelist
+
+  before_action :set_source
+
+  def set_source
+    # params[:q] is referring to the query string in url
+    # session holds data transferred between server & browser
+    session[:source] = params[:q] if params[:q]
+  end
 end
