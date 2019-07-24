@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
 	# about, & contact are static pages (hence why they use just 'get' vs. 'resources')
 	# Customize show route for portolios (want it to be /portfolio vs. /portfolios). Also assign it custom prefix portfolio_show
   resources :portfolios, except: [:show]
