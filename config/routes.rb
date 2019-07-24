@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-	# about, & contact are static pages (hence why they use just 'get' vs. 'resources')
+  # Customize devise routes (eg, change users/sign_in to 'login')
+  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout', sign_up: 'register' }
+	
+  # about, & contact are static pages (hence why they use just 'get' vs. 'resources')
 	# Customize show route for portolios (want it to be /portfolio vs. /portfolios). Also assign it custom prefix portfolio_show
   resources :portfolios, except: [:show]
   get 'angular-items', to: 'portfolios#angular'
