@@ -20,12 +20,15 @@ class PortfoliosController < ApplicationController
   # New Action - renders form to create new portfolio item.
   def new
     @portfolio_item = Portfolio.new
+    # Instatiate 3 versions of technologies
+    3.times { @portfolio_item.technologies.build }
   end
 
   # Create Action
   def create
     # Specify to Rails the params that we will allow thru
-    @portfolio_item = Portfolio.new(params.require(:portfolio).permit(:title, :subtitle, :body))
+    @portfolio_item = Portfolio.new(params.require(:portfolio).permit(:title, :subtitle, :body, 
+      technologies_attributes: [:name]))
 
     respond_to do |format|
       if @portfolio_item.save
