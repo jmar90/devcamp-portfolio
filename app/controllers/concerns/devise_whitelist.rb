@@ -1,3 +1,5 @@
+# This will whitelist the name parameter for devise (currently,
+    # it is not whitelisted & is not being saved to db)
 module DeviseWhitelist
   extend ActiveSupport::Concern
 

@@ -13,8 +13,8 @@
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <!-- If there's a currently signed in user -->
-    <% if current_user %>
+    <!-- If there's a currently signed in user & they come from user model (vs. from OpenStruct) -->
+    <% if current_user.is_a?(User) %>
       <!-- Found path name via rake routes | grep logout -->
       <%= link_to "Logout", destroy_user_session_path, method: :delete %>
     <% else %>
@@ -23,5 +23,9 @@
     <% end %>
     
     <%= yield %>
+    
+    <% if session[:source] %>
+      <p>Thanks for visiting me from <%= session[:source] %></p>
+    <% end %>
   </body>
 </html>
