@@ -18,14 +18,7 @@
     <!-- Render navbar partial -->
     <%= render "shared/nav", location: "top" %>
 
-    <!-- If there's a currently signed in user & they come from user model (vs. from OpenStruct) -->
-    <% if current_user.is_a?(User) %>
-      <!-- Found path name via rake routes | grep logout -->
-      <%= link_to "Logout", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%= link_to "Register", new_user_registration_path %>
-      <%= link_to "Login", new_user_session_path %>
-    <% end %>
+    <%= login_helper %>
     
     <!-- Yield: Application layout file loads, & then whatever page we go to "slides into" where yield is (eg, If we go to Portfolio index page, that content slides into where yield is written) -->
     <%= yield %>
