@@ -1,4 +1,5 @@
 class PortfoliosController < ApplicationController
+  layout "portfolio"
 
   # Index Action. Call Portfolio model & make available to view
   # thru @portfolio_items var.
