@@ -16,7 +16,7 @@
     <p class="alert"><%= alert %></p>
 
     <!-- Render navbar partial -->
-    <%= render "shared/nav" %>
+    <%= render "shared/nav", location: "top" %>
 
     <!-- If there's a currently signed in user & they come from user model (vs. from OpenStruct) -->
     <% if current_user.is_a?(User) %>
