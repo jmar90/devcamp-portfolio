@@ -12,16 +12,8 @@
   </thead>
 
   <tbody>
-    <% @blogs.each do |blog| %>
-      <tr>
-        <td><%= blog.title %></td>
-        <td><%= blog.body %></td>
-        <td><%= link_to blog.status, toggle_status_blog_path(blog) %></td>
-        <td><%= link_to 'Show', blog %></td>
-        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-        <td><%= link_to 'Delete', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
+    <!-- In the background, Rails looks for a partial called blog, which we have (_blog.html.erb). For this to work, you must pass in instance var (index action in blog controller). Rails finds the partial _blog, & automatically iterates over blog posts (we don't need to include each loop in _blog). -->
+    <%= render @blogs %>
   </tbody>
 </table>
 
