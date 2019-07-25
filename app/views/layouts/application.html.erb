@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>DevcampPortfolio</title>
+    <title><%= @page_title %></title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+
+    <meta name="keywords" content="<%= @seo_keywords %>" />
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -12,6 +14,15 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
+
+    <!-- Navbar -->
+    <div>
+      <div><%= link_to "Home", root_path %></div>
+      <div><%= link_to "About", about_me_path %></div>
+      <div><%= link_to "Contact", contact_path %></div>
+      <div><%= link_to "Blog", blogs_path %></div>
+      <div><%= link_to "Portfolio", portfolios_path %></div>
+    </div>
 
     <!-- If there's a currently signed in user & they come from user model (vs. from OpenStruct) -->
     <% if current_user.is_a?(User) %>
@@ -22,6 +33,7 @@
       <%= link_to "Login", new_user_session_path %>
     <% end %>
     
+    <!-- Yield: Application layout file loads, & then whatever page we go to "slides into" where yield is (eg, If we go to Portfolio index page, that content slides into where yield is written) -->
     <%= yield %>
     
     <% if session[:source] %>
