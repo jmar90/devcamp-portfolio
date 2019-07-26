@@ -8,5 +8,5 @@ class Blog < ApplicationRecord
   validates_presence_of :title, :body
 
   # Indicate that blog belongs to topic
-  belongs_to :topic
+  belongs_to :topic, optional: true
 end
