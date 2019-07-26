@@ -5,7 +5,7 @@
     <meta name="viewport" content="width-device-width, initial-scale=1, shrink-to-fit">
 
     <title><%= @page_title %></title>
-    
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -16,19 +16,22 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <div class="site-wrapper">
+      <div class="site-wrapper-inner">
+        <div class="cover-container">
+          <!-- Render navbar partial -->
+          <%= render "shared/application_nav" %>
 
-    <!-- Render navbar partial -->
-    <%= render "shared/nav", location: "top" %>
+          <%= login_helper %>
+          
+          <!-- Yield: Application layout file loads, & then whatever page we go to "slides into" where yield is (eg, If we go to Portfolio index page, that content slides into where yield is written) -->
+          <%= yield %>
+          
+          <%= @copyright %>
 
-    <%= login_helper %>
-    
-    <!-- Yield: Application layout file loads, & then whatever page we go to "slides into" where yield is (eg, If we go to Portfolio index page, that content slides into where yield is written) -->
-    <%= yield %>
-    
-    <%= @copyright %>
-
-    <%= source_helper("application") %>
+          <%= source_helper("application") %>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
