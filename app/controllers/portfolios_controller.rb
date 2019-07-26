@@ -1,7 +1,8 @@
 class PortfoliosController < ApplicationController
   before_action :set_portfolio_item, only: [:edit, :show, :update, :destroy]
-
   layout 'portfolio'
+
+  access all: [:show, :index, :angular], user: {except: [:destroy, :create, :new, :update, :edit]}, site_admin: :all
 
   # Index Action. Call Portfolio model & make available to view
   # thru @portfolio_items var.

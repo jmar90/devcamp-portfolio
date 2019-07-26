@@ -2,6 +2,9 @@ class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy, :toggle_status]
   layout "blog" #link to blog file in layout directory
 
+  # Define user permissions. all - everyone (not necessarily signed in); user - regular user
+  access all: [:show, :index], user: {except: [:destroy, :create, :new, :update, :edit]}, site_admin: :all
+
   # GET /blogs
   # GET /blogs.json
   def index
