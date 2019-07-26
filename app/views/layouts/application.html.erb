@@ -23,6 +23,8 @@
     <!-- Yield: Application layout file loads, & then whatever page we go to "slides into" where yield is (eg, If we go to Portfolio index page, that content slides into where yield is written) -->
     <%= yield %>
     
+    <%= @copyright %>
+
     <%= source_helper("application") %>
   </body>
 </html>
