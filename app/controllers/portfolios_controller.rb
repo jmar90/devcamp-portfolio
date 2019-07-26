@@ -1,5 +1,7 @@
 class PortfoliosController < ApplicationController
-  layout "portfolio"
+  before_action :set_portfolio_item, only: [:edit, :show, :update, :destroy]
+
+  layout 'portfolio'
 
   # Index Action. Call Portfolio model & make available to view
   # thru @portfolio_items var.
@@ -16,12 +18,11 @@ class PortfoliosController < ApplicationController
   # Create custom angular method that filter by angular subtitle
   def angular
     @angular_portfolio_items = Portfolio.angular
-  end 
+  end
 
   # New Action - renders form to create new portfolio item.
   def new
     @portfolio_item = Portfolio.new
-    # Instatiate 3 versions of technologies
     3.times { @portfolio_item.technologies.build }
   end
 
@@ -33,7 +34,6 @@ class PortfoliosController < ApplicationController
     respond_to do |format|
       if @portfolio_item.save
         format.html { redirect_to portfolios_path, notice: 'Your portfolio item is now live.' }
-        # Redirect to portfolios_path (index pg) after saving
       else
         format.html { render :new }
       end
@@ -42,19 +42,13 @@ class PortfoliosController < ApplicationController
 
   # Edit Action
   def edit
-    # Find portfolio item to edit (look in params/URL for ID).
-    # This found item will be passed to view as @portfolio_item
-    @portfolio_item = Portfolio.find(params[:id])
   end
 
   # Update Action
-  def update
-    # Find portfolio item to update
-    @portfolio_item = Portfolio.find(params[:id])
-
+ def update
     respond_to do |format|
       if @portfolio_item.update(portfolio_params)
-        format.html { redirect_to portfolios_path, notice: 'The record was successfully updated.' }
+        format.html { redirect_to portfolios_path, notice: 'The record successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -63,15 +57,10 @@ class PortfoliosController < ApplicationController
 
   # Show Action
   def show
-    # Find portfolio item 
-    @portfolio_item = Portfolio.find(params[:id])
   end
 
   # Destroy Action: delete record & then redirect user
   def destroy
-    # Find portfolio item to delete
-    @portfolio_item = Portfolio.find(params[:id])
-
     # Destroy/delete the record
     @portfolio_item.destroy
 
@@ -85,10 +74,15 @@ class PortfoliosController < ApplicationController
   private
 
   def portfolio_params
-    params.require(:portfolio).permit(:title, 
-                                      :subtitle, 
-                                      :body, 
+    params.require(:portfolio).permit(:title,
+                                      :subtitle,
+                                      :body,
                                       technologies_attributes: [:name]
-                                      )
+                                     )
+  end
+
+  # Find given portfolio item
+  def set_portfolio_item
+    @portfolio_item = Portfolio.find(params[:id])
   end
 end

@@ -1,7 +1,7 @@
 <h1>Portfolio Items</h1>
 
 <!-- Link to add new portfolio item via link_to method -->
-<%= link_to "Create New Item", new_portfolio_path %>
+<%= link_to "Create New Item", new_portfolio_url %>
 
 <!-- Since the partial name doesn't match up to controller name (controller is portfolios vs. portfolio_items), we have to declare that this is a partial -->
-<% render partial: 'portfolio_item', collection: @portfolio_items %>
+<%= render partial: 'portfolio_item', collection: @portfolio_items %>
