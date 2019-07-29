@@ -13,7 +13,7 @@ class PortfoliosController < ApplicationController
     #@portfolio_items = Portfolio.angular 
     # Filter to ruby on rails subtitle
     #@portfolio_items = Portfolio.ruby_on_rails_portfolio_items
-    @portfolio_items = Portfolio.all
+    @portfolio_items = Portfolio.by_position
   end
 
   # Create custom angular method that filter by angular subtitle
